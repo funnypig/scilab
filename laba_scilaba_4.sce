@@ -24,7 +24,7 @@ for i=2:fin
     end
 end
 time = timer()
-disp('Простые числа от 2 до 10^6 найдены за '+string(time)+' секунд');
+disp('Простые числа от 2 до 10^6 найдены за '+string(time));
 
 // 2. twins primes
 timer();
@@ -38,7 +38,7 @@ for i = 1:length(prims)-1
     end
 end
 time = timer();
-disp(string(twins_count)+' простых чисел близнецов от 2 до 10^6 было найдено за '+string(time)+' секунд');
+disp(string(twins_count)+' простых чисел близнецов от 2 до 10^6 было найдено за '+string(time));
 
 // 3. count primes for all n = 2:10^6
 timer()
@@ -109,11 +109,17 @@ function num = generateNumber()
     end
 endfunction
 // return True if the number is prime or False if it isn't
+// вторая версия. сократил в 2 раза время проверки, отказавшись от четных чисел. сразу не догадался
+// приведенный в конце вывод вряд ли будет изменен.
 function b=ifPrime(n)
     b = %T;
     fin = int(sqrt(n))
-    for i=2:fin
-        // p mod i == 0
+    if modulo(n,2)==0 then
+        b = %F
+        return
+    end
+    for i=3:2:fin
+        // p mod i == 0. про модуль я узнал позднее. написано было раньше. не стану уже трогать тут и далее.
         if (n - i * int(n / i) == 0) then
             b = %F;
             break;
@@ -219,9 +225,9 @@ disp('E: '+string(found_e)+', начинается с '+string(found_e_ind)+' з
 
 --> exec('E:\0University\SciLab\laba_scilaba_4.sce', -1)
 
- Простые числа от 2 до 10^6 найдены за 10.296875 секунд
+ Простые числа от 2 до 10^6 найдены за 10.296875
 
- 8169 простых чисел близнецов от 2 до 10^6 было найдено за 0.375 секунд
+ 8169 простых чисел близнецов от 2 до 10^6 было найдено за 0.375
 
  Количество простых чисел (pi(n)) от 1 до 10^6 найдено за 1.046875
 
