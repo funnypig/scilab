@@ -1,0 +1,49 @@
+function num = genNum()
+    n = modulo(int(rand()*100+1),6) // number up to 10^6
+    num = int(rand()*10)
+    if num == 0 then
+        num = 10**n
+    else
+        num = num*(10**n)
+    end
+    num = num + int(rand()*(10**n-1))
+endfunction
+
+n = int(input('Enter n '))
+l = list()
+for i=1:n
+    l($+1)=genNum()
+end
+
+f = %T
+for i=1:n
+    for j=1:n
+        if i ~= j then
+            if modulo(l(i)-l(j), n) == 0 then
+                disp('Разница чисел '+string(l(i))+' '+string(l(j))+' делит '+string(n))
+                f = %F
+                break
+            end
+        end
+    end
+    if ~f then
+        break
+    end
+end
+
+if f then
+    disp('Среди '+string(n)+' случайных чисел не нашлось пары, разность которой делилась бы '+string(n))
+end
+
+// OUTPUT
+// 1. 
+/*
+Enter n 
+10
+ Разница чисел 9947 27 делит 10
+*/
+// 2.
+/*
+Enter n 
+3
+ Среди 3 случайных чисел не нашлось пары, разность которой делилась бы 3
