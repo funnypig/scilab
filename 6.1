@@ -1,11 +1,13 @@
+// Lab #6 Task 1. Antipiev
+
 function [nv]=makeVector(x1,x2,y1,y2,z1,z2)
     nv = [x2-x1 y2-y1 z2-z1]
 endfunction
 
 function [v]=vecDob(v1,v2)
-    vd1 = det([v1[2] v1[3], v2[2] v2[3]]);
-    vd2 = det([v1[1] v1[3], v2[1] v2[3]]);
-    vd3 = det([v1[1] v1[2], v2[1] v2[2]]);
+    vd1 = det([v1[2] v1[3]; v2[2] v2[3]]);
+    vd2 = det([v1[1] v1[3]; v2[1] v2[3]]);
+    vd3 = det([v1[1] v1[2]; v2[1] v2[2]]);
     v = [vd1 vd2 vd3]
 endfunction
 
