@@ -1,0 +1,45 @@
+function res=cnum(n)
+    res = 0
+    while n>0
+        x=int(x/10)
+        res=res+1
+    end
+endfunction
+
+function res=reverse(n)
+    res = 0
+    while n>0
+        res = res * 10 + modulo(n,10)
+        n = int(n/10)
+    end
+endfunction
+
+function res=ifPal(n)
+    f = %t
+    rn = reverse(n)
+    while (n>0)
+        if modulo(n,10)~=modulo(rn,10) then
+            f = %f
+            break
+        end
+        n = int(n/10)
+        rn = int(rn/10)
+    end
+    res = f
+endfunction
+
+function res=ninb(n,b)
+    res = ''
+    while n>0 
+        res = string(modulo(n,b)) + res
+        n = int(n/b)
+    end
+endfunction
+
+count = 0
+// stylish code? JUST HARDCORE!
+for i=1:10**6
+    if (ifPal(int(strtod(ninb(i,2))))) & (ifPal(int(strtod(ninb(i,2))))) then
+        count = count + 1
+    end
+end
