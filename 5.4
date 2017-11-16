@@ -1,0 +1,78 @@
+// Lab #5 task 4
+
+function [nsd, k]=nsdk(a,b)
+    k = 0
+    while (a ~=0) & (b ~= 0)
+        if a>b then
+            a = modulo(a,b)
+        else
+            b = modulo(b,a)
+        end
+        k=k+1
+    end
+    nsd = a+b
+endfunction
+
+[v,n] = nsdk(124,56)
+disp('gcd(124,56) = '+string(v)+' , calculated in '+string(n)+' steps')
+
+for k=1:20
+    found = %F
+    for i=1:10**5
+        for j=1:10**5
+            if i>j then
+                [vv,nn] = nsdk(i,j)
+                if nn == k then
+                    disp(string(k)+'. '+string(i)+' '+string(j))
+                    found = %T
+                    break
+                end
+            end
+        end
+        if found then
+            break
+        end
+    end
+end
+
+// OUTPUT:
+/*
+ gcd(124,56) = 4 , calculated in 4 steps
+
+ 1. 2 1
+
+ 2. 3 2
+
+ 3. 5 3
+
+ 4. 8 5
+
+ 5. 13 8
+
+ 6. 21 13
+
+ 7. 34 21
+
+ 8. 55 34
+
+ 9. 89 55
+
+ 10. 144 89
+
+ 11. 233 144
+
+ 12. 377 233
+
+ 13. 610 377
+
+ 14. 987 610
+
+ 15. 1597 987
+
+ 16. 2584 1597
+*/
+// ЭТО ЧИСЛА ФИББОНАЧИ!!!
+// 17. 4181 2584
+// 18. 6765 4181
+// 19. 10946 4181
+// 20. 17711 10946
