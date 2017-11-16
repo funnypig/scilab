@@ -1,0 +1,52 @@
+// Lab #6 Task 3. Antipiev
+function [napryam, p]=zapara(a,b,c,d) // ZAgalnePARAmetrichne
+    napryam = [-b-c,a,a] // norm[a,b,c]. -ab-ac+ab+ac=0 => norm _|_ napryam
+    if a == 0 then
+        x = 0
+    else
+        x = -d/a
+    end
+    if b == 0 then
+        y = 0
+    else
+        y = -d/b
+    end
+    if c == 0 then
+        z = 0
+    else
+        z = -d/c
+    end
+    
+    p = [x,y,z]
+    
+    disp('x = '+string(x)+'+'+string(napryam(1))+'t');
+    disp('y = '+string(y)+'+'+string(napryam(2))+'t');
+    disp('z = '+string(z)+'+'+string(napryam(3))+'t');
+endfunction
+
+// to make this function ideal
+// i should overload 'arapaz' to take x0 y0 z0 as one point p[x0,y0,z0]
+// and take the boolean argument if the user wants to output answer
+// anyway the idea is clear. i hope
+function abcd=arapaz(u,x0,y0,z0)
+    a = u(2)+u(3)
+    b = u(3)-u(1)
+    c = -(u(1)+u(2))
+    d = -u(2)*x0+u(1)*y0-u(3)*x0+u(1)*z0-u(3)*y0+u(2)*z0
+    abcd=[a,b,c,d]
+    disp(string(a)+'x+'+string(b)+'y+'+string(c)+'z+'+string(d)+'=0')
+endfunction
+
+arapaz([1,2,3], 1,2,3)
+zapara(1,1,2,3)
+
+// OUTPUT:
+/*
+ 5x+2y+-3z+0=0
+
+ x = -3+-3t
+
+ y = -3+1t
+
+ z = -1.5+1t
+*/
