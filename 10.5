@@ -1,0 +1,15 @@
+function res=planes3(a1,b1,c1,d1,a2,b2,c2,d2,a3,b3,c3,d3)
+    mat = [a1 b1 c1; a2, b2, c2; a3, b3, c3]
+    r = rank(mat)
+    if r == 1 then
+        res = '|||'
+    elseif r == 2
+        if det(mat) == 0 then
+            res = '|\|'
+        else
+            res = '\|/'
+        end
+    else
+        res = '1_point_intersection'
+    end
+endfunction
