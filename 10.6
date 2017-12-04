@@ -1,0 +1,12 @@
+function b=line(x1,y1,z1,x2,y2,z2)
+    t = linspace(-20,20,100)
+    deff("[x,y,z]=fx(t,q)", ["x=x1+(x2-x1).*t";
+                             "y=y1+(y2-y1).*t";
+                             "z=z1+(z2-z1).*t"])
+    [Xf,Yf,Zf] = eval3dp(fx,t,t)
+    plot3d(Xf,Yf,Zf)
+    xtitle('Straight line')
+    b = 0
+endfunction
+
+line(2,5,3,-1,8,6)
