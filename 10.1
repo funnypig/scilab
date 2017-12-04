@@ -1,0 +1,42 @@
+// Lab 10. Task 1
+
+function v=makeVector(x1,x2,y1,y2,z1,z2)
+    v=[x2-x1,y2-y1,z2-z1]
+endfunction
+
+function b=isThisPlane(v1,v2,v3)
+    if det([v1;v2;v3])==0 then
+        b = %T
+    else
+        b=%F
+    end
+endfunction
+
+/*p1 = input('1st Point [x,y,z]')
+p2 = input('2nd Point [x,y,z]')
+p3 = input('3d Point [x,y,z]')
+p4 = input('4th Point [x,y,z]')*/
+p1 = [1 1 1]
+p2 = [1 1 2]
+p3 = [1 2 1]
+p4 = [2 1 1]
+
+v1 = makeVector(p1(1),p2(1),p1(2),p2(2),p1(3),p2(3))
+v2 = makeVector(p1(1),p3(1),p3(2),p3(2),p3(3),p3(3))
+v3 = makeVector(p1(1),p4(1),p1(2),p4(2),p1(3),p4(3))
+
+u = linspace(-10,10,100)
+v = linspace(-10,10,100)
+deff("[x,y,z]=f(u,v)",["x = p1(1)+v1(1).*u+v3(1).*v";
+              "y = p2(1)+v1(2).*u+v3(2).*v";
+              "z = p3(1)+v1(3).*u+v3(3).*v"])
+[Xf, Yf, Zf] = eval3dp(f,u,v)
+plot3d(Xf,Yf,Zf) 
+xtitle('Just plane')
+
+disp(isThisPlane(v1,v2,v3))
+
+
+
+
+
