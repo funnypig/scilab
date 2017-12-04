@@ -1,0 +1,29 @@
+function d=mplane(A,B,C,D,mx,my,mz)
+    mu = -(abs(D)/D)/sqrt(A*A+B*B+C*C)
+    a = A/mu
+    b = B/mu
+    c = C/mu
+    p = D/mu
+    
+    // plane
+    u = linspace(-10,10,100)
+    v = linspace(-10,10,100)
+    deff("[x,y,z]=f(u,v)",["x = (-b-c).*u+a.*v";
+              "y = a.*u+b.*v";
+              "z = a.*u+c.*v"])
+    [Xf, Yf, Zf] = eval3dp(f,u,v)
+    plot3d(Xf,Yf,Zf)
+    
+    // point
+    v = linspace(-5,5,100)
+    deff("[x,y,z]=f1(v,v)",["x = mx-(b+c).*v";
+              "y = my-a.*v";
+              "z = mz-a.*v"])
+    [Xf, Yf, Zf] = eval3dp(f1,v,v)
+    plot3d(Xf,Yf,Zf)
+    xtitle('There is really perpendicular. Just different aspects')
+    
+    d = abs(mx*a+my*b+mz*c-p)
+endfunction
+
+mplane(2,4,1,3,-4,5,8)
