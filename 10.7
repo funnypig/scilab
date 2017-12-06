@@ -1,0 +1,29 @@
+function cut=angle(a,b,c,d,l,m,n)
+    cut = -(abs(d)/d)*(a*l+b*m+c*n)/sqrt(a*a+b*b+c*c)/sqrt(l*l+m*m+n*n)
+    cut = asin(cut)
+endfunction
+
+function b = plane(a,b,c,d)
+    u = linspace(-10,10,100)
+    v = linspace(-10,10,100)
+    deff("[x,y,z]=f(u,v)",["x = a.*u+(-b-c).*v";
+              "y = b.*u+a.*v";
+              "z = c.*u+a.*v"])
+    [Xf, Yf, Zf] = eval3dp(f,u,v)
+    plot3d(Xf,Yf,Zf) 
+endfunction
+
+function b=line(x0,y0,z0,l,m,n)
+    t = linspace(-20,20,100)
+    deff("[x,y,z]=fx(t,q)", ["x=x0+l.*t";
+                             "y=y0+m.*t";
+                             "z=z0+n.*t"])
+    [Xf,Yf,Zf] = eval3dp(fx,t,t)
+    plot3d(Xf,Yf,Zf)
+    b = 0
+endfunction
+
+plane(2,5,1,3)
+line(4,8,-1,4,2,5)
+
+xtitle('Angle = '+string(angle(2,5,1,3,4,2,5)*57))

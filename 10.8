@@ -1,0 +1,43 @@
+//  lab 10. task 8
+// distance from point to line
+// sorry for rofl with sphere :D
+
+function b=line(x0,y0,z0,l,m,n,t1,t2)
+    t = linspace(t1,t2,100)
+    deff("[x,y,z]=fx(t,q)", ["x=x0+l.*t";
+                             "y=y0+m.*t";
+                             "z=z0+n.*t"])
+    [Xf,Yf,Zf] = eval3dp(fx,t,t)
+    plot3d(Xf,Yf,Zf)
+    b = 0
+endfunction
+
+function b=sphere(r,x0,y0,z0)
+    t = linspace(0,%pi,100)
+    p = linspace(0,2*%pi,100)
+    deff("[x,y,z]=fx(p,t)", ["x=x0+r.*cos(p).*sin(t)";
+                             "y=y0+r.*sin(p).*sin(t)";
+                             "z=z0+r.*cos(t)"])
+    [Xf,Yf,Zf] = eval3dp(fx,p,t)
+    plot3d(Xf,Yf,Zf,flag=[5,6,3])
+    b = 0
+endfunction
+
+function d=distance(mx,my,mz,x0,y0,z0,l,m,n)
+    t = ((mx-x0)/(l+m+n)+(my+mz-y0-z0)/(m-l))/3
+    x = x0+l*t
+    y = y0+m*t
+    z = z0+n*t
+    d = sqrt((x-mx)^2+(y-my)^2+(z-mz)^2)
+    disp(d)
+    
+    line(x0,y0,z0,l,m,n,t,t+10)
+    line(mx,my,mz,-m-n,l,l,t-(x-x0)/l,t)
+    sphere(0.1,mx,my,mz)
+    sphere(0.1,mx+(-m-n)*t,my+l*t,mz+l*t)
+endfunction
+
+distance(6,5,8, 0,0,0, 2,1,-1.5)
+
+
+
